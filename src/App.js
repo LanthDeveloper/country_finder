@@ -8,7 +8,7 @@ import CountryDetails from './components/CountryDetails';
 const App = () => {
   return (
     <Router>
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <Sidebar />
         <div className="flex-1 p-4">
           <Routes>
