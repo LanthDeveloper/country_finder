@@ -73,7 +73,7 @@ const Home = () => {
   };
 
   return (
-    <div class="max-w-screen-xl">
+    <div>
       <input
         type="text"
         placeholder="Search..."
