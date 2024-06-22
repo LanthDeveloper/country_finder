@@ -16,7 +16,8 @@ https://countryfinder-pro.vercel.app/
 
 ## Tecnologías Utilizadas
 - React
-- Apollo Client
+- Tailwind
 - HTML/CSS
-- JavaScript/TypeScript
+- JavaScript
+- Apollo Client
 - GraphQL
