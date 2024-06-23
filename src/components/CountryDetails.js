@@ -28,7 +28,7 @@ const CountryDetails = () => {
   const { name, capital, currency, languages } = data.country;
 
   return (
-    <div className='mt-20 md:mt-0'>
+    <div className='mt-20 md:mt-0 text-white'>
       <h1 className="text-2xl font-bold mb-4">{name}</h1>
       <p><strong>Capital:</strong> {capital}</p>
       <p><strong>Currency:</strong> {currency}</p>

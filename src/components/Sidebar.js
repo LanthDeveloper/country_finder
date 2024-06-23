@@ -25,7 +25,11 @@ const Sidebar = () => {
           className="text-white hover:text-gray-400 focus:outline-none"
           onClick={toggleDropdown}
         >
-          Menu
+          <svg fill="#ffffff" className='w-8' viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+            <g id="SVGRepo_iconCarrier"> <title>stack</title> <path d="M6 14h20v4h-20v-4zM6 26h20v-4h-20v4zM6 6v4h20v-4h-20z"/> </g>    
+          </svg>
         </button>
       </div>
 

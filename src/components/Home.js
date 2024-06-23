@@ -19,18 +19,39 @@ const Home = () => {
   const { loading, error, data } = useQuery(COUNTRIES_QUERY);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedContinent, setSelectedContinent] = useState('');
   const countriesPerPage = 6;
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm]);
+  }, [searchTerm, selectedContinent]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const filteredCountries = data.countries.filter(country =>
-    country.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSearchFocus = () => {
+    setShowPopup(true);
+  };
+
+  const handleSearchBlur = () => {
+    setTimeout(() => setShowPopup(false), 200); // Timeout to allow click event on popup
+  };
+
+  const handleContinentClick = (continent) => {
+    setSelectedContinent(continent);
+  };
+
+  const handleClearClick = () => {
+    setSelectedContinent('');
+  };
+
+  const filteredCountries = data.countries.filter(country => {
+    const continentName = country.continent.name;
+    const isInAmerica = continentName === 'North America' || continentName === 'South America';
+    return country.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+           (selectedContinent === '' || (selectedContinent === 'America' && isInAmerica) || selectedContinent === continentName);
+  });
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
@@ -51,7 +72,7 @@ const Home = () => {
     const pageNumbers = [];
     const maxPages = 5;
     const halfMaxPages = Math.floor(maxPages / 2);
-    
+
     let startPage = Math.max(1, currentPage - halfMaxPages);
     let endPage = Math.min(totalPages, startPage + maxPages - 1);
 
@@ -79,8 +100,31 @@ const Home = () => {
         placeholder="Search..."
         value={searchTerm}
         onChange={handleSearchChange}
+        onFocus={handleSearchFocus}
+        onBlur={handleSearchBlur}
         className="p-2 border border-gray-300 rounded mb-4 w-full"
       />
+      {showPopup && (
+        <div className="absolute bg-white border border-gray-300 rounded mt-1 p-2 w-80 z-10">
+          <ul>
+            {['Africa', 'America', 'Asia', 'Europe', 'Oceania'].map(continent => (
+              <li
+                key={continent}
+                onClick={() => handleContinentClick(continent)}
+                className={`cursor-pointer p-1 hover:bg-gray-200 ${selectedContinent === continent ? 'bg-blue-100' : ''}`}
+              >
+                {continent} {selectedContinent === continent && '✓'}
+              </li>
+            ))}
+            <li
+              onClick={handleClearClick}
+              className={`cursor-pointer p-1 hover:bg-gray-200 ${selectedContinent === '' ? 'bg-blue-100' : ''}`}
+            >
+              Clear {selectedContinent === '' && '✓'}
+            </li>
+          </ul>
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentCountries.map((country) => (
           <CountryCard key={country.code} country={country} />
