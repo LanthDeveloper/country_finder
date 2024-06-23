@@ -16,7 +16,7 @@ const Sidebar = () => {
       <div className="relative md:static w-full md:w-48 flex flex-row md:flex-col justify-between md:justify-normal bg-gray-800 text-white md:h-screen md:p-4  py-3 md:py-0">
       {/* Logo alineado al centro en dispositivos móviles */}
       <div className="flex justify-center md:justify-start">
-        <img src={logo} alt="Logo" className="ml-3 md:ml-0 self-center w-16 md:w-32" />
+        <Link to="/"><img src={logo} alt="Logo" className="ml-3 md:ml-0 self-center w-16 md:w-32" /></Link>
       </div>
       
       {/* Botón para activar el dropdown en dispositivos móviles */}
