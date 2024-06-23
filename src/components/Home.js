@@ -150,7 +150,7 @@ const Home = () => {
           </ul>
         </div>
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-3 md:mt-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentCountries.map((country) => (
           <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
         ))}
