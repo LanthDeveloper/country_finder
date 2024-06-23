@@ -23,8 +23,8 @@ const CountryCard = ({ country }) => {
         <div>
           <div className="text-6xl mb-2 mx-auto">{country.emoji}</div>
         </div>
-        <div class="flex flex-col">
-          <h2 className="text-xl font-bold mb-2">{country.name}</h2>
+        <div class="flex flex-col gap-1">
+          <h2 className="text-xl font-bold">{country.name}</h2>
           <p>{country.continent.name}</p>
         </div>
       </div>

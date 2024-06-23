@@ -30,7 +30,7 @@ const Sidebar = () => {
       </div>
 
       {/* Lista de opciones */}
-      <ul className={`bg-gray-800 text-white absolute top-full w-full md:static md:mt-4  gap-2 items-center md:items-start ${dropdownOpen ? 'flex' : 'hidden'} flex flex-col md:flex gap-5 pb-5 md:pb-0 text-xl md:text-2xl`}>
+      <ul className={`bg-gray-800 text-white absolute top-full w-full md:static md:mt-4  gap-2 items-center md:items-start ${dropdownOpen ? 'flex' : 'hidden'} flex flex-col md:flex gap-5 pb-5 md:pb-0 text-xl md:text-2xl font-bold`}>
         <li>
           <Link to="/" className="hover:text-gray-400">Home</Link>
         </li>
