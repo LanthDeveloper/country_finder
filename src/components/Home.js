@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import CountryCard from './CountryCard';
-import CountryDetails from './CountryDetails'; // Importar el componente CountryDetails
+import CountryDetails from './CountryDetails';
 
 const COUNTRIES_QUERY = gql`
   {
@@ -22,7 +22,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedContinent, setSelectedContinent] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState(null); // Estado para el país seleccionado
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const countriesPerPage = 6;
 
   useEffect(() => {
@@ -37,11 +37,12 @@ const Home = () => {
   };
 
   const handleSearchBlur = () => {
-    setTimeout(() => setShowPopup(false), 200); // Timeout to allow click event on popup
+    setTimeout(() => setShowPopup(false), 200);
   };
 
   const handleContinentClick = (continent) => {
     setSelectedContinent(continent);
+    setShowPopup(false);
   };
 
   const handleClearClick = () => {
@@ -54,6 +55,11 @@ const Home = () => {
 
   const handleClosePopup = () => {
     setSelectedCountry(null);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setShowPopup(false);
   };
 
   const filteredCountries = data.countries.filter(country => {
@@ -72,11 +78,6 @@ const Home = () => {
   const handleClick = (event, pageNumber) => {
     event.preventDefault();
     setCurrentPage(pageNumber);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    setShowPopup(false); 
   };
 
   const renderPageNumbers = () => {
@@ -113,8 +114,21 @@ const Home = () => {
         onChange={handleSearchChange}
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
-        className="p-2 border bg-black text-white border-gray-300 rounded mb-4 w-full"
+        className="p-2 border bg-black text-white border-gray-300 rounded mb-2 w-full"
       />
+      {selectedContinent && (
+        <div className="flex items-center mb-4">
+          <span className="bg-blue-500 text-white text-sm font-bold mr-2 px-2.5 py-0.5 rounded">
+            {selectedContinent}
+          </span>
+          <button 
+            onClick={handleClearClick}
+            className="text-sm text-gray-400 hover:text-white"
+          >
+            Clear
+          </button>
+        </div>
+      )}
       {showPopup && (
         <div className="absolute bg-black text-white font-bold border border-gray-300 rounded mt-1 p-2 w-full md:w-80 z-10">
           <ul>
