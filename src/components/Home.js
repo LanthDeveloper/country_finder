@@ -73,7 +73,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='mt-20 md:mt-0'>
       <input
         type="text"
         placeholder="Search..."
