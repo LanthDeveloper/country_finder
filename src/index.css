@@ -16,3 +16,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.box_imgCard{
+  overflow: hidden;
+}
+.card_country img{
+  transform: scale(1);
+  transition: all .35s ease-in-out;
+}
+.card_country:hover img{
+  filter: saturate(120%);
+  transform: scale(1.2);
+}

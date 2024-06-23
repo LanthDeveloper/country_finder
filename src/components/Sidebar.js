@@ -12,7 +12,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='fixed md:static w-full md:w-48'>
+    <div className='fixed md:static w-full md:w-48 z-10'>
       <div className="relative md:static w-full md:w-48 flex flex-row md:flex-col justify-between md:justify-normal bg-gray-800 text-white md:h-screen md:p-4  py-3 md:py-0">
       {/* Logo alineado al centro en dispositivos móviles */}
       <div className="flex justify-center md:justify-start">
@@ -30,7 +30,7 @@ const Sidebar = () => {
       </div>
 
       {/* Lista de opciones */}
-      <ul className={`bg-gray-800 text-white absolute top-full w-full md:static md:mt-4 flex flex-col gap-2 items-center md:items-start ${dropdownOpen ? 'block' : 'hidden'} md:block pb-5 md:pb-0`}>
+      <ul className={`bg-gray-800 text-white absolute top-full w-full md:static md:mt-4  gap-2 items-center md:items-start ${dropdownOpen ? 'flex' : 'hidden'} flex flex-col md:flex gap-5 pb-5 md:pb-0 text-xl md:text-2xl`}>
         <li>
           <Link to="/" className="hover:text-gray-400">Home</Link>
         </li>

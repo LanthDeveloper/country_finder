@@ -15,9 +15,11 @@ const CountryCard = ({ country }) => {
   }, [country.name]);
 
   return (
-    <Link to={`/country/${country.code}`} className="block p-4 bg-white rounded shadow hover:shadow-lg transition-shadow">
-      {imageUrl && <img src={imageUrl} alt={country.name} className="w-full h-24 object-cover mb-2 rounded" />}
-      <div class="flex gap-3">
+    <Link to={`/country/${country.code}`} className="card_country block bg-gray-800 text-white rounded-3xl shadow hover:shadow-lg transition-shadow">
+      <div className='box_imgCard rounded-t-3xl'>
+        {imageUrl && <img src={imageUrl} alt={country.name} className="rounded-t-3xl w-full h-40 object-cover object-center rounded" />}
+      </div>
+      <div class="flex gap-3 px-3 mt-3">
         <div>
           <div className="text-6xl mb-2 mx-auto">{country.emoji}</div>
         </div>

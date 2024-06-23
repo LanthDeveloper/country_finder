@@ -87,8 +87,8 @@ const Home = () => {
         ))}
       </div>
       {totalPages > 1 && (
-        <div className="mt-4">
-          <ul className="pagination flex justify-center items-center">
+        <div className="mt-6">
+          <ul className="pagination flex justify-center items-center text-white">
             {currentPage > 1 && (
               <li className="inline-block mx-1">
                 <a href="#" onClick={(e) => handleClick(e, currentPage - 1)}>
