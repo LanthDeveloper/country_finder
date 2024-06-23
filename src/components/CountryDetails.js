@@ -44,7 +44,7 @@ const CountryDetails = ({ code }) => {
   const flagUrl = getFlagUrl(code);
 
   return (
-    <div className='w-full md:w-80 my-5 md:mt-0 text-white px-6 md:p-4'>
+    <div className='w-full md:w-80 my-16 md:my-0 md:mt-0 text-white px-6 md:p-4'>
       <div className='box_imgCard mb-4'>
         {imageUrl && <img src={imageUrl} alt={name} className="w-full h-56 object-cover object-center" />}
       </div>

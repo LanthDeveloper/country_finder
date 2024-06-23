@@ -179,7 +179,7 @@ const Home = () => {
       {selectedCountry && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-20">
           <div className="bg-black p-0 rounded-lg shadow-lg w-full md:w-80 relative">
-            <button onClick={handleClosePopup} className="absolute top-6 right-6 font-black text-white">
+            <button onClick={handleClosePopup} className="absolute top-4 md:top-6 right-6 md:right-8 font-black text-2xl md:text-xl text-white">
               ✕
             </button>
             <CountryDetails code={selectedCountry.code} />
