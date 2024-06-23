@@ -106,7 +106,7 @@ const Home = () => {
   };
 
   return (
-    <div className='mt-20 md:mt-0 relative'>
+    <div className='mt-24 md:mt-0 relative'>
       <input
         type="text"
         placeholder="Search Country..."
@@ -150,7 +150,7 @@ const Home = () => {
           </ul>
         </div>
       )}
-      <div className="mt-3 md:mt-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-5 md:mt-4 md:mx-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentCountries.map((country) => (
           <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
         ))}
