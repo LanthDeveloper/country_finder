@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { fetchCountryImage } from '../services/unsplash';
 import { getFlagUrl } from '../services/flagsAPI';
 
-const CountryCard = ({ country }) => {
+const CountryCard = ({ country, onSelect }) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const CountryCard = ({ country }) => {
   const flagUrl = getFlagUrl(country.code);
 
   return (
-    <Link to={`/country/${country.code}`} className="card_country block bg-gray-800 text-white rounded-3xl shadow hover:shadow-lg transition-shadow">
+    <div onClick={() => onSelect(country)} className="card_country block bg-gray-800 text-white rounded-3xl shadow hover:shadow-lg transition-shadow cursor-pointer">
       <div className='box_imgCard rounded-t-3xl'>
         {imageUrl && <img src={imageUrl} alt={country.name} className="rounded-t-3xl w-full h-40 object-cover object-center rounded" />}
       </div>
@@ -30,7 +29,7 @@ const CountryCard = ({ country }) => {
           <p>{country.continent.name}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

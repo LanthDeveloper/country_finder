@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import CountryCard from './CountryCard';
+import CountryDetails from './CountryDetails'; // Importar el componente CountryDetails
 
 const COUNTRIES_QUERY = gql`
   {
@@ -21,6 +22,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedContinent, setSelectedContinent] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState(null); // Estado para el país seleccionado
   const countriesPerPage = 6;
 
   useEffect(() => {
@@ -44,6 +46,14 @@ const Home = () => {
 
   const handleClearClick = () => {
     setSelectedContinent('');
+  };
+
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedCountry(null);
   };
 
   const filteredCountries = data.countries.filter(country => {
@@ -94,31 +104,31 @@ const Home = () => {
   };
 
   return (
-    <div className='mt-20 md:mt-0'>
+    <div className='mt-20 md:mt-0 relative'>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Search Country..."
         value={searchTerm}
         onChange={handleSearchChange}
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
-        className="p-2 border border-gray-300 rounded mb-4 w-full"
+        className="p-2 border bg-black text-white border-gray-300 rounded mb-4 w-full"
       />
       {showPopup && (
-        <div className="absolute bg-white border border-gray-300 rounded mt-1 p-2 w-80 z-10">
+        <div className="absolute bg-black text-white font-bold border border-gray-300 rounded mt-1 p-2 w-full md:w-80 z-10">
           <ul>
             {['Africa', 'America', 'Asia', 'Europe', 'Oceania'].map(continent => (
               <li
                 key={continent}
                 onClick={() => handleContinentClick(continent)}
-                className={`cursor-pointer p-1 hover:bg-gray-200 ${selectedContinent === continent ? 'bg-blue-100' : ''}`}
+                className={`cursor-pointer p-1 hover:bg-white hover:text-black ${selectedContinent === continent ? 'bg-white text-black' : ''}`}
               >
                 {continent} {selectedContinent === continent && '✓'}
               </li>
             ))}
             <li
               onClick={handleClearClick}
-              className={`cursor-pointer p-1 hover:bg-gray-200 ${selectedContinent === '' ? 'bg-blue-100' : ''}`}
+              className={`cursor-pointer p-1 hover:bg-white hover:text-black ${selectedContinent === '' ? 'bg-black' : ''}`}
             >
               Clear {selectedContinent === '' && '✓'}
             </li>
@@ -127,7 +137,7 @@ const Home = () => {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentCountries.map((country) => (
-          <CountryCard key={country.code} country={country} />
+          <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
         ))}
       </div>
       {totalPages > 1 && (
@@ -149,6 +159,16 @@ const Home = () => {
               </li>
             )}
           </ul>
+        </div>
+      )}
+      {selectedCountry && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-20">
+          <div className="bg-black p-0 rounded-lg shadow-lg w-full md:w-80 relative">
+            <button onClick={handleClosePopup} className="absolute top-6 right-6 font-black text-white">
+              ✕
+            </button>
+            <CountryDetails code={selectedCountry.code} />
+          </div>
         </div>
       )}
     </div>
