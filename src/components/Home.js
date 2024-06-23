@@ -91,11 +91,14 @@ function Home() {
 
   return (
     <div className='mt-24 md:mt-0 relative'>
-      <input
+     <input
         type="text"
         placeholder="Busca un país..."
         value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
+        onChange={(e) => {
+          setBusqueda(e.target.value);
+          setMenuContinentes(false); 
+        }}
         onFocus={toggleMenuContinentes}
         onBlur={() => setTimeout(() => setMenuContinentes(false), 200)}
         className="p-2 border bg-black text-white border-gray-300 rounded mb-2 w-full"
