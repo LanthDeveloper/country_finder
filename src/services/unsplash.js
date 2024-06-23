@@ -1,4 +1,3 @@
-// src/services/unsplash.js
 import axios from 'axios';
 import { UNSPLASH_ACCESS_KEY, PIXABAY_API_KEY } from '../config';
 
@@ -16,8 +15,6 @@ const pixabayApi = axios.create({
 export const fetchCountryImage = async (countryName) => {
   try {
     console.log('Buscando imagen para:', countryName);
-    
-    // Intenta primero con Unsplash
     try {
       console.log('Intentando con Unsplash...');
       const unsplashResponse = await unsplashApi.get('/search/photos', {
@@ -33,8 +30,6 @@ export const fetchCountryImage = async (countryName) => {
     } catch (unsplashError) {
       console.error('Error con Unsplash:', unsplashError.message);
     }
-
-    // Si no encuentra en Unsplash o hay un error, intenta con Pixabay
     console.log('Intentando con Pixabay...');
     const pixabayResponse = await pixabayApi.get('', {
       params: {

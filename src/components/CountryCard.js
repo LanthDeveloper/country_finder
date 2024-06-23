@@ -2,27 +2,45 @@ import React, { useEffect, useState } from 'react';
 import { fetchCountryImage } from '../services/unsplash';
 import { getFlagUrl } from '../services/flagsAPI';
 
-const CountryCard = ({ country, onSelect }) => {
-  const [imageUrl, setImageUrl] = useState('');
+function CountryCard({ country, onSelect }) {
+  const [imagenUrl, setImagenUrl] = useState('');
 
   useEffect(() => {
-    const loadImage = async () => {
-      const url = await fetchCountryImage(country.name);
-      setImageUrl(url);
-    };
-    loadImage();
+    async function cargarImagen() {
+      try {
+        const url = await fetchCountryImage(country.name);
+        setImagenUrl(url);
+      } catch (error) {
+        console.error("Error al cargar la imagen del país:", error);
+        setImagenUrl(''); 
+      }
+    }
+    cargarImagen();
   }, [country.name]);
 
-  const flagUrl = getFlagUrl(country.code);
+  const banderaUrl = getFlagUrl(country.code);
 
   return (
-    <div onClick={() => onSelect(country)} className="card_country block bg-gray-800 text-white rounded-3xl shadow hover:shadow-lg transition-shadow cursor-pointer">
-      <div className='box_imgCard rounded-t-3xl'>
-        {imageUrl && <img src={imageUrl} alt={country.name} className="rounded-t-3xl w-full h-40 object-cover object-center rounded" />}
+    <div 
+      onClick={() => onSelect(country)} 
+      className="tarjeta-pais block bg-gray-800 text-white rounded-3xl shadow hover:shadow-lg transition-shadow cursor-pointer"
+    >
+      <div className='contenedor-imagen rounded-t-3xl'>
+        {imagenUrl && (
+          <img 
+            src={imagenUrl} 
+            alt={`Paisaje de ${country.name}`} 
+            className="rounded-t-3xl w-full h-40 object-cover object-center rounded" 
+          />
+        )}
       </div>
       <div className="flex gap-3 px-3 mt-3">
         <div>
-          <img src={flagUrl} alt={`${country.name} flag`} className="w-16 h-16 object-cover object-center rounded-3xl" />
+          <img 
+            src={banderaUrl} 
+            alt={`Bandera de ${country.name}`} 
+            className="w-16 h-16 object-cover object-center rounded-3xl" 
+          />
         </div>
         <div className="flex flex-col gap-1">
           <h2 className="text-xl font-bold">{country.name}</h2>
@@ -31,6 +49,6 @@ const CountryCard = ({ country, onSelect }) => {
       </div>
     </div>
   );
-};
+}
 
 export default CountryCard;
