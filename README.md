@@ -1,7 +1,7 @@
 # Country Finder
 
 ## Descripción
-Una aplicación web desarrollada para mostrar información detallada de países utilizando GraphQL y React. Los usuarios pueden explorar diferentes países y obtener detalles como la capital, idioma, moneda y visualizar imágenes representativas. 🌍🔍🖼️
+Country Finder es una aplicación web desarrollada en donde los usuarios pueden explorar diferentes países y obtener detalles como la capital, idioma, moneda y asi tambien poder ver imágenes representativas del pais y su bandera. 🌍🔍🖼️
 
 ## Características
 - Desarrollada con React y Apollo Client.
