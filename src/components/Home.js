@@ -76,6 +76,7 @@ const Home = () => {
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+    setShowPopup(false); 
   };
 
   const renderPageNumbers = () => {
